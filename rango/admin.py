@@ -4,11 +4,14 @@ from rango.models import Category, Page
 
 #  Customizing fields and order
 class PageAdmin(admin.ModelAdmin):
-    fields = ["title", "category", "url"]
     list_display = ("title", "category", "url")
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("name",)}
 
 
 # Register your models here.
 
-admin.site.register(Category)
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(Page, PageAdmin)
